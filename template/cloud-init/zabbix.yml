@@ -1,0 +1,24 @@
+#cloud-config
+timezone: Asia/Tokyo
+locale: en_US.UTF-8
+users:
+  - name: admin
+    sudo: ALL=(ALL) ALL
+    groups: users, sudo, docker
+    password: $1$hoge$zja42e4Qs10ghYZK1cWr70
+    uid: 1000
+    shell: /bin/bash
+packages:
+  - zabbix-server-mysql
+  - zabbix-frontend-php
+  - zabbix-agent
+  - zabbix-apache-conf
+package_update: true
+package_upgrade: true
+apt:
+  preserve_sources_list: true
+  sources:
+    zabbix:
+      source: "deb http://repo.zabbix.com/zabbix/5.0/ubuntu focal main"
+      keyid: "a1848f5352d022b9471d83d0082ab56ba14fe591"
+      keyserver: "keyserver.ubuntu.com"

@@ -1,0 +1,19 @@
+#cloud-config
+timezone: Asia/Tokyo
+locale: en_US.UTF-8
+users:
+  - name: admin
+    sudo: ALL=(ALL) ALL
+    groups: users, sudo, docker
+    password: $1$hoge$zja42e4Qs10ghYZK1cWr70
+    uid: 1000
+    shell: /bin/bash
+packages:
+  - docker
+  - docker-compose
+package_update: true
+package_upgrade: true
+runcmd:
+  - git clone https://github.com/zabbix/zabbix-docker.git /usr/local/zabbix-docker
+  - cd /usr/local/zabbix-docker
+  - docker-compose --file docker-compose_v3_alpine_mysql_latest.yaml up -d
