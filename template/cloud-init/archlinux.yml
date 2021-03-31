@@ -8,7 +8,7 @@ users:
     password: $1$hoge$zja42e4Qs10ghYZK1cWr70
     uid: 1000
     shell: /bin/bash
-    packages:
-      - vim
-    package_update: true
-    package_upgrade: true
+packages:
+  - vim
+package_update: true
+package_upgrade: true
