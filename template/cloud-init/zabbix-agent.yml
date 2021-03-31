@@ -9,15 +9,9 @@ users:
     uid: 1000
     shell: /bin/bash
 packages:
-  - docker
-  - docker-compose
   - zabbix-agent
 package_update: true
 package_upgrade: true
-runcmd:
-  - git clone https://github.com/Gen-Arch/zabbix-docker.git /usr/local/zabbix-docker
-  - cd /usr/local/zabbix-docker
-  - docker-compose up -d
 apt:
   preserve_sources_list: true
   sources:

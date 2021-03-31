@@ -3,7 +3,8 @@ resource "lxd_profile" "zabbix" {
 
   config = {
     "boot.autostart"   = "true"
-    "environment.HOGE" = "hogehoge"
+    "environment.POSTGRES_USER"     = "zabbix"
+    "environment.POSTGRES_PASSWORD" = "zabbix"
     "user.user-data"   = file("./template/cloud-init/zabbix-docker.yml")
   }
 
@@ -88,3 +89,28 @@ resource "lxd_profile" "archlinux" {
   }
 }
 
+resource "lxd_profile" "zabbix_agent" {
+  name = "zabbix_agent"
+
+  config = {
+    "boot.autostart"   = "true"
+    "user.user-data"   = file("./template/cloud-init/zabbix-agent.yml")
+  }
+
+  device {
+    name = "eth0"
+    type = "nic"
+    properties = {
+      network = lxd_network.net1.name
+    }
+  }
+
+  device {
+    name = "root"
+    properties = {
+      "path" = "/"
+      "pool" = "default"
+    }
+    type = "disk"
+  }
+}

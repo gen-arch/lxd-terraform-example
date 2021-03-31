@@ -13,10 +13,14 @@ resource "lxd_container" "u1" {
   profiles = [lxd_profile.app.name]
 }
 
-#resource "lxd_container" "a1" {
-#  name     = "a1"
-#  image    = "images:archlinux/cloud"
-#  profiles = [lxd_profile.archlinux.name]
-#}
+resource "lxd_container" "a1" {
+ name     = "a1"
+ image    = "images:archlinux/cloud"
+ profiles = [lxd_profile.archlinux.name]
+}
 
-
+resource "lxd_container" "u1-zabbix" {
+  name     = "u1-zabbix"
+  image    = "ubuntu:20.04"
+  profiles = [lxd_profile.zabbix_agent.name]
+}
